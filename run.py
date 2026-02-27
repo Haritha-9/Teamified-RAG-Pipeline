@@ -65,9 +65,4 @@ def main():
         print("\nSource Pages:",
               [doc.metadata["page"] for doc in retrieved_docs])
         print("\n" + "-" * 60 + "\n")
-
-
-
-
-if __name__ == "__main__":
     main()
