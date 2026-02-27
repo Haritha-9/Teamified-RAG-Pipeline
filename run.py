@@ -44,7 +44,7 @@ def main():
     print("System ready.\n")
 
     while True:
-        query = input("Enter your question (type 'exit' to quit): ")
+        query = input("User Query (type 'exit' to quit): ")
 
         if query.lower() == "exit":
             break
@@ -64,13 +64,10 @@ def main():
         })
 
         print("\nDetected Intent:", intent)
-        print("\nAnswer:\n", response)
-        print("\nSource Pages:",
-              [doc.metadata["page"] for doc in retrieved_docs])
+        print("\nRetrieved Chunks:")
+        for i, doc in enumerate(retrieved_docs):
+            print(f"\n --{doc.page_content}")
+        print("\nLLM Response:\n", response)
+
         print("\n" + "-" * 60 + "\n")
-
-
-
-
-if __name__ == "__main__":
     main()
