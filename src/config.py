@@ -8,7 +8,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY not found in environment")
 
-PDF_PATH = "data/philippine_history.pdf"
+PDF_PATH = "C:/Users/harharitha/Downloads/PHILIPPINE-HISTORY-SOURCE-BOOK-FINAL-SEP022021.pdf"
 
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 150

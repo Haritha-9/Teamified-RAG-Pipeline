@@ -7,6 +7,8 @@ from src.intent_classifier import classify_intent
 from src.answer_chain import build_answer_chain
 from src.config import TOP_K
 
+import time
+
 
 def main():
 
@@ -14,7 +16,11 @@ def main():
     print("----------------------------------")
 
     # Ask user for PDF path
-    pdf_path = input("C:/Users/harharitha/Downloads/PHILIPPINE-HISTORY-SOURCE-BOOK-FINAL-SEP022021.pdf").strip()
+    pdf_path = input("Enter full path to your PDF file: ").strip()
+    start = time.time()
+    pages = load_pdf(pdf_path)
+    print("PDF loaded in", time.time() - start, "seconds")
+
 
     if not os.path.exists(pdf_path):
         print("Error: File not found.")
@@ -25,6 +31,12 @@ def main():
     pages = load_pdf(pdf_path)
     documents = chunk_documents(pages)
     vector_store = build_or_load_vector_store(documents)
+
+    start = time.time()
+    documents = chunk_documents(pages)
+    print("Chunking done in", time.time() - start, "seconds")
+
+    
 
     retriever = vector_store.as_retriever(search_kwargs={"k": TOP_K})
     answer_chain = build_answer_chain()
@@ -56,6 +68,8 @@ def main():
         print("\nSource Pages:",
               [doc.metadata["page"] for doc in retrieved_docs])
         print("\n" + "-" * 60 + "\n")
+
+
 
 
 if __name__ == "__main__":
