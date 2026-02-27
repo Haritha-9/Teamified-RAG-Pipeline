@@ -7,7 +7,7 @@ def classify_intent(query: str):
 
     llm = ChatOpenAI(
         model="gpt-4o-mini",
-        temperature=0,
+        temperature=0.2,
         openai_api_key=OPENAI_API_KEY
     )
 

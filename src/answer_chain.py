@@ -9,15 +9,13 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 def build_answer_chain():
     model = ChatOpenAI(
         model="gpt-4o-mini",
-        temperature=0,
+        temperature=0.2,
         openai_api_key=OPENAI_API_KEY
     )
     system_instruction = """You are a Philippine History assistant.
-                        STRICT RULES:- Answer ONLY using the provided context.
-                        - Do NOT use outside knowledge.
-                        - If answer is not found in context, say:
-                        "The answer is not available in the provided context."
-                        - Provide the final answer in ONLY 2 lines.- Do not hallucinate."""
+                        - Provide the final answer in ONLY 2 lines.- 
+                        -If answers is not found provide answer is not available'
+                        - Do not hallucinate."""
     prompt = ChatPromptTemplate.from_messages([("system", system_instruction),
                                            ("human", """Intent: {intent}
 Context:{context}
