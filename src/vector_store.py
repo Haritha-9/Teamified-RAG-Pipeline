@@ -1,5 +1,5 @@
 import os
-from langchain_core.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from src.config import OPENAI_API_KEY
 

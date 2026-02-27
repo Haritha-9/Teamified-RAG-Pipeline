@@ -1,6 +1,7 @@
 langchain
 langchain-openai
 langchain-text-splitters
+langchain-community
 faiss-cpu
 pymupdf
 python-dotenv

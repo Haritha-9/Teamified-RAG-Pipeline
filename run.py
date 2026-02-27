@@ -14,7 +14,7 @@ def main():
     print("----------------------------------")
 
     # Ask user for PDF path
-    pdf_path = input("Enter full path to your PDF file: ").strip()
+    pdf_path = input("C:/Users/harharitha/Downloads/PHILIPPINE-HISTORY-SOURCE-BOOK-FINAL-SEP022021.pdf").strip()
 
     if not os.path.exists(pdf_path):
         print("Error: File not found.")
