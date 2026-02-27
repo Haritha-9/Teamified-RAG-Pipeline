@@ -10,6 +10,8 @@ pandas
 pydantic
 sentence-transformers
 dotenv
+
+##################################
 tokenizers==0.22.2
 torch==2.10.0
 tqdm==4.67.3

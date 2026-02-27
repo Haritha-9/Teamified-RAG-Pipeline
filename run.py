@@ -6,7 +6,7 @@ from src.vector_store import build_or_load_vector_store
 from src.intent_classifier import classify_intent
 from src.answer_chain import build_answer_chain
 from src.config import TOP_K
-
+from src.config import PDF_PATH
 import time
 
 
@@ -16,11 +16,9 @@ def main():
     print("----------------------------------")
 
     # Ask user for PDF path
-    pdf_path = input("Enter full path to your PDF file: ").strip()
-    start = time.time()
-    pages = load_pdf(pdf_path)
-    print("PDF loaded in", time.time() - start, "seconds")
-
+    pdf_path = PDF_PATH
+###ENTER THE PATH HERE from local
+    # pdf_path = r"C:
 
     if not os.path.exists(pdf_path):
         print("Error: File not found.")
@@ -31,11 +29,6 @@ def main():
     pages = load_pdf(pdf_path)
     documents = chunk_documents(pages)
     vector_store = build_or_load_vector_store(documents)
-
-    start = time.time()
-    documents = chunk_documents(pages)
-    print("Chunking done in", time.time() - start, "seconds")
-
     
 
     retriever = vector_store.as_retriever(search_kwargs={"k": TOP_K})
@@ -44,7 +37,7 @@ def main():
     print("System ready.\n")
 
     while True:
-        query = input("Enter your question (type 'exit' to quit): ")
+        query = input("User Query: Enter your question (type 'exit' to quit): ")
 
         if query.lower() == "exit":
             break
@@ -64,7 +57,11 @@ def main():
         })
 
         print("\nDetected Intent:", intent)
-        print("\nAnswer:\n", response)
+        print("\n Retrieved chunks: \n")
+        for doc in retrieved_docs:
+            print(f"(Page {doc.metadata['page']})")
+            print(doc.page_content[:200])
+        print("\n LLMResponse:\n", response)
         print("\nSource Pages:",
               [doc.metadata["page"] for doc in retrieved_docs])
         print("\n" + "-" * 60 + "\n")
